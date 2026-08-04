@@ -82,7 +82,17 @@ export default defineConfig({
                   { text: "Custom Scripts", link: "/apis/repolib/sdk/custom-scripts.md" },
                   { text: "Valuables", link: "/apis/repolib/sdk/valuables.md" },
                   { text: "Shop Items", link: "/apis/repolib/sdk/items.md" },
-                  { text: "Enemies", link: "/apis/repolib/sdk/enemies.md" },
+                  {
+                    text: "Enemies",
+                    link: "/apis/repolib/sdk/enemies/enemies.md",
+                    collapsed: true,
+                    items: [
+                      { text: "Overview", link: "/apis/repolib/sdk/enemies/enemies.md" },
+                      { text: "Enemy Prefab", link: "/apis/repolib/sdk/enemies/prefab.md" },
+                      { text: "Controller Script", link: "/apis/repolib/sdk/enemies/controller.md" },
+                      { text: "Animator Script", link: "/apis/repolib/sdk/enemies/anim.md" }
+                    ]
+                  },
                   { text: "Levels", link: "/apis/repolib/sdk/levels.md" },
                   { text: "Cosmetics", link: "/apis/repolib/sdk/cosmetics.md" },
                 ],
