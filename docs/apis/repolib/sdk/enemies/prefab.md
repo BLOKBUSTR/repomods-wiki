@@ -13,9 +13,9 @@ If you accidentally use a normal Metallic texture the way you'd expect, your mod
 or black altogether.
 
 ::: tip TIP
-To preview a Metallic/darkening texture accurately in Blender, you can connect it to the "Fac(tor)" property on a Mix Shader
-node, with one input connected to your Principled BSDF, and the other unconnected. The unconnected socket will simply
-appear as pure black.
+To preview a Metallic/darkening texture accurately in Blender, you can connect it to the "Fac" property on a Mix
+Shader node, with one input connected from your Principled BSDF, and the other unconnected. The unconnected socket will
+simply appear as pure, unshaded black.
 
 > Screenshot
 
