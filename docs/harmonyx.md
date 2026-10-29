@@ -6,7 +6,7 @@ A guide for setting up your HarmonyX Project to create mods for R.E.P.O.
 
 To begin development, ensure the following core tools are installed on your system:
 
-- **.NET SDK**: [Version 9.0.x](https://dotnet.microsoft.com/en-us/download/dotnet/9.0).
+- **.NET SDK**: [Version 9.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0).
 - **Integrated Development Environment (IDE)**:\
   While any C# compatible editor works, we recommend the following:
   | IDE (Download Link) | Description |
@@ -22,7 +22,7 @@ To begin development, ensure the following core tools are installed on your syst
 
 ## Creating a Plugin Project
 
-This tutorial walks through the process of developing a BepInEx mod for R.E.P.O. using [R.E.P.O. Modding SDKs and Templates](https://github.com/linkoid/Repo.Sdks#readme). This streamlines mod development by automating game detection, using best practices, and simplifying the build process.
+This tutorial walks through the process of developing a BepInEx mod for R.E.P.O. using [R.E.P.O. Modding SDKs and Templates](https://github.com/linkoid/Repo.Sdks). This streamlines mod development by automating game detection, using best practices, and simplifying the build process.
 
 ::: info Why use the R.E.P.O. Modding SDKs?
 - **Auto-Detection**: Automatically identifies the game installation directory.
@@ -225,4 +225,7 @@ Don't forget to update the (Major-)versions as updates get released for the pack
    - Via the mod manager.
 
 ## More Resources
-For additional resources, it is highly recommended to read the [BepInEx Plugin Documentation](https://docs.bepinex.dev/articles/dev_guide/plugin_tutorial/2_plugin_start.html)
+It is highly recommended to read these additional sources to fully understand BepInEx and HarmonyX:
+- [BepInEx Plugin Documentation](https://docs.bepinex.dev/articles/dev_guide/plugin_tutorial/2_plugin_start.html)
+- [Harmony 2 Documentation](https://harmony.pardeike.net/articles/intro.html)
+- [HarmonyX GitHub Wiki](https://github.com/BepInEx/HarmonyX/wiki)
