@@ -5,36 +5,87 @@ This page is currently Work in Progress!
 :::
 
 ::: info NOTE
-**This guide assumes you have a REPOLib Unity project set up for REPOLib modding.\
+**This guide assumes you have a patched Unity project set up for REPOLib modding.\
 If not, follow [Getting Started](./start.md) first.**
 :::
 
-  - The patcher outputs vanilla levels to `Assets/REPO/Game/ScriptableObjects/Level` and their assets to `Assets/REPO/Game/Resources/level`.
-- On the `Level` asset, make sure that the `Valuable Presets` list is empty.
-  - This will make generic valuables spawn in your level. If you'd like specific valuables to also spawn, see [Proxy Valuable Presets](#proxy-valuable-presets).
+The patcher outputs vanilla level data to `Assets/REPO/Game/ScriptableObjects/Level`, and their modules to `Assets/REPO/Game/Resources/level`.
 
-## Creating a Level object
+## Creating the Level Asset
 
-- Right click in your mod folder and choose `Create > Level > Level Preset` to create a `Level` object. The default name for this will be `Level - _____`. Replace the underscores in the `Level` object with your `Resource` name.
+1. Create a `Level` asset by right-clicking in your mod folder and choosing `Create > Level > Level Preset`. The default name for this will be "Level - _____"; replace the underscores with your level's name.
+2. Fill in the following fields. Most of them are required, otherwise your level will generate errors.
+   - `Narrative Name`: The name that will appear in-game to the players in the loading screen.\
+     For this guide, we will use "Level - Example".
+   - `Loading Graphic 01`: The building sprite that the truck crashes into on the loading screen.
+   - `Loading Graphic 02`: The background sprite for terrain like trees/mountains.
+   - `Loading Graphic 03`: The far background sprite for further terrain and the horizon/moon/sun.
+   - `Valuable Presets`: The valuables you want to appear in your level. You can choose to create your own [valuable preset](#valuable-preset), or leave it empty to use the Generic preset.\
+      If you want to use vanilla valuable presets, do *not* add them directly; instead, see [Proxy Valuable Presets](#proxy-valuable-presets).
+   - `Music Preset`: The "music" that can play randomly during the level. You can create your own [music preset](#music-preset), or use a placeholder vanilla preset (such as `Level Music - Arctic`).
+   - `Ambience Presets`: The ambient noises that play randomly during the level. You can create your own [ambience preset](#ambience-preset), or use a placeholder vanilla preset (such as `Level Ambience - Global`).
+3. Configure and experiment with the following fields to taste. You can refer to vanilla's `Level` assets for ideal settings.
+   - **Fog**:
+     - `Fog Color`: The color of the fog that fades and obscures distant objects.
+     - `Fog Start/End Distance`: The distances from the player, in units, where the fog falloff will start and end respectively. The default end distance, 15, is the size of one module. The player cannot see anything past the end distance.
+   - **Environment**:
+     - `Ambient Color`: The ambient color that illuminates the level.
+     - `Ambient Color Adaptation`: The ambient color used while the player is crouching, which should be *slightly* brighter than the former to compensate for the player not having their flashlight enabled.
+   - **Color**:
+     - `Color Temperature`: Sets the post-processing white balance. Positive values are warmer, while negative values are colder.
+     - `Color Filter`: The color that is multiplied in post-processing to tint the render.
+   - **Bloom**:
+     - `Bloom Intensity`: The strength of the bloom effect.
+     - `Bloom Threshold`: The pixel brightness threshold which the bloom effect is applied to. Pixels brighter than the threshold contribute to the effect, while pixels below don't. This value is in gamma-space.
+   - **Vignette**:
+     - `Vignette Color`: The color of the vignette, which is the darkening around the screen edges.
+     - `Vignette Intensity`: The strength of the vignette.
+     - `Vignette Smoothness`: The smoothness of the vignette borders. Lower values will induce "banding" in the vignette layers.
+
+Leave all the Module and other unmentioned fields empty or default.
+
+### Valuable Preset
+
+The `Level Valuables` asset is used to determine which valuables can spawn in your level, which can include your own.
+
+1. Right-click in your mod folder and choose `Create > Level > Level Valuables Preset` to create a new `Level Valuables` asset.
+<!-- 2. Drag-and-drop your valuable prefabs into their respective size categories. Be sure not to mix any. -->
+<!-- Is this correct? -->
+
+Again, do *not* use vanilla valuable presets directly; see [Proxy Valuable Presets](#proxy-valuable-presets).
+
+### Music Preset
+
+The `Level Music` asset is used to play random, occasional music/ambient tracks.
+
+1. Right-click in your mod folder and choose `Create > Level > Level Music Preset` to create a new `Level Music` asset.
+2. Populate the **Tracks** list:
+   - `Name`: The name of the track. This is currently not used in-game.
+   - `Audio Clip`: The reference to your track file.
+   - `Volume`: The volume of the track. All vanilla presets have this set to 0.2.
+
+Vanilla levels typically have five tracks, spanning between 1-2 minutes. It is **highly** recommended to use the OGG format; you can use Audacity or FFmpeg to convert your tracks to OGG.
+
+### Ambience Preset
+
+The `Level Ambience` asset is used to play a variety of ambient noise loops and ambience breakers (short sounds which interrupt the ambience).
+
+1. Right-click in your mod folder and choose `Create > Level > Level Ambience` to create a new `Level Ambience` asset.
+2. Configure the following fields:
+   - `Loop Clip`: The reference to the constant ambience loop audio.
+   - `Loop Volume`: The volume of the ambience loop.
+   - **Breakers**:
+     - `Sound`: The reference to the ambience breaker audio.
+     - `Volume`: The volume of the ambience breaker.
+
+As with level music, it's recommended to use OGG for the `Loop Clip`. However, ambience breakers can be WAV; this format has less decompression overhead, making it more suitable for short, instantaneous sound effects.
+
+## Creating the REPOLib Level Content Asset
+
+- Right-click in your mod folder and choose `Create > REPOLib > Level` to create a `Level Content` asset. Rename this to your level's name.
 - Fill in the fields:
-  - `Resource Path`: A unique name for your level that you'll name all your files after.
-  - `Narrative Name`: The actual name that will show up in game and to the players in the loading screen.\
-  For this example level, we'll be using:
-    - `Resource Path`: Example
-    - `Narrative Name`: Example Level
-  - `Loading Graphics 01`: The building sprite that the truck crashes in to on the level loading screen.
-  - `Loading Graphics 02`: The background sprite for terrain like trees/mountains.
-  - `Loading Graphics 03`: The far background sprite for further terrain and the horizon/moon/sun.
-  - `Valuable Presets`: The valuables you want to appear in your level, see [Proxy Valuable Presets](#proxy-valuable-presets).
-  - `Music Preset`: The "music" that can play randomly during the level. For now, let's use a placeholder vanilla one. `Level Music - Arctic (Level Music)`.
-  - `Ambience Presets`: The ambient noises that play randomly during the level. For now, let's use a placeholder vanilla one. `Level Ambience - Global (Level Ambience)`.
-
-## Creating a Level Content object
-
-- Right click in your mod folder and choose `Create > REPOLib > Level` to create a `Level Content` asset. Rename this to your `Narrative Name`.
-- Fill in the fields:
-  - `Level`: Drag your `Level` asset into this entry. (`Level - Example`)
-  - `Connect Object`: The [door](#doors) prefab that always spawns between connected modules (optional).
+  - `Level`: Drag your `Level` asset into this field (in our case, `Level - Example`).
+  - `Connect Object`: An optional reference to a [door](#doors) prefab, which is spawned between **all** connected modules (like McJannek Station, Headman Manor and Swiftbroom Academy).
   - `Block Object`: The prefab that always spawns between unconnected modules (optional).
 
 ## Modules

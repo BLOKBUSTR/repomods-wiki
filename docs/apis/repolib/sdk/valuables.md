@@ -10,10 +10,11 @@ If not, follow [Getting Started](./start.md) first.**
   - `Prefab`: A reference to your prefab. Drag and drop your prefab into this field.
   - `Valuable Presets`: The presets that determine which levels your valuable can spawn in. The vanilla presets are:
     - `Valuables - Generic` (Always applies to all vanilla levels)
-    - `Valuables - Wizard`
-    - `Valuables - Manor`
     - `Valuables - Arctic`
+    - `Valuables - Desert`
+    - `Valuables - Manor`
     - `Valuables - Museum`
+    - `Valuables - Wizard`
 
 ::: tip MODDED LEVELS
 There are two options for your valuable to spawn in modded levels:
